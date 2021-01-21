@@ -1,12 +1,13 @@
 package com.orbitallcorp.customers.services;
 
+import com.orbitallcorp.customers.domains.Customer;
 import com.orbitallcorp.customers.domains.Usuario;
 import com.orbitallcorp.customers.repositories.UsuarioRepository;
-import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,19 +16,35 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    public List<Usuario> findAll() {
+        List<Usuario> users = new ArrayList<>();
+        usuarioRepository.findAll().forEach(users :: add);
+
+        return users;
+    }
+
     public Usuario save(Usuario user){
         return usuarioRepository.save(user);
     }
 
-    public String login(Long id, String user, String password){
-        Optional<Usuario> usuario = usuarioRepository.findById(id);
+    public Usuario findOne(long id){
+        Usuario user = usuarioRepository.findById(id).orElse(null);
 
-        Boolean login = usuario.equals(user);
-        Boolean pass = usuario.equals(password);
+        return user;
+    }
+
+    public Boolean login(long id, String user, String password){
+
+        Usuario find = usuarioRepository.findById(id).orElse(null);
+
+        Boolean login = find.equals(user);
+        Boolean pass = find.equals(password);
 
         if((login && pass) == true){
-            return "{\"success\":1}";
+            return true;
         }
-        return "{\"Error\":1}";
+
+        return false;
+
     }
 }

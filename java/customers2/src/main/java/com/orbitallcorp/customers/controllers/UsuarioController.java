@@ -1,5 +1,6 @@
 package com.orbitallcorp.customers.controllers;
 
+import com.orbitallcorp.customers.domains.Customer;
 import com.orbitallcorp.customers.domains.Usuario;
 import com.orbitallcorp.customers.services.UsuarioService;
 import net.minidev.json.JSONObject;
@@ -17,6 +18,12 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @GetMapping
+    public ResponseEntity<List<Usuario>> findAll() {
+        List<Usuario> users = usuarioService.findAll();
+        return ResponseEntity.ok(users);
+    }
+
     @PostMapping
     public ResponseEntity<Usuario> save(@RequestBody Usuario usuario) {
         Usuario savedCustomer = usuarioService.save((usuario));
@@ -25,9 +32,12 @@ public class UsuarioController {
     }
 
     @GetMapping("/login/{id}")
-    public ResponseEntity alter(@RequestBody Usuario usuario, @PathVariable("id") Long id) {
-        String validate =  usuarioService.login(id, usuario.getLogin(),usuario.getPassword());
+    public ResponseEntity logon(@RequestBody String login, String password, @PathVariable("id") Long id) {
+        //Boolean validate =  usuarioService.login(usuario.getId(), usuario.getLogin(),usuario.getPassword());
 
-        return ResponseEntity.ok(validate);
+        Usuario user = usuarioService.findOne(id);
+        Boolean available = usuarioService.login(user.getId(),login, password);
+
+        return ResponseEntity.ok(available);
     }
 }
