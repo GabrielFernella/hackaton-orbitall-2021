@@ -30,7 +30,21 @@ api.findById = (request, response) => {
   const req = request.params.id;
   console.log(req);
 
-  neDB.findOne({ _id: req }).exec((exception, customers) => {
+  neDB.findOne({ _id: req }, (exception, customers) => {
+    if (customers === null) {
+      const setence = 'Customer not found';
+      response.json({ mensagem: setence });
+    } else {
+      response.json(customers);
+    }
+  });
+};
+
+api.findByName = (request, response) => {
+  const req = request.params.name;
+  console.log(req);
+
+  neDB.findOne({ name: req }, (exception, customers) => {
     if (customers === null) {
       const setence = 'Customer not found';
       response.json({ mensagem: setence });
@@ -82,7 +96,7 @@ api.delete = (request, response) => {
 
   neDB.remove({ _id: req }, {}, (exception, customers) => {
     if (exception || customers === 0) {
-      const setence = 'Customer not found';
+      const setence = `/${request.params.name}/`;
       console.log(setence, exception);
       return response.status(400).json({ mensagem: setence });
     } else {
