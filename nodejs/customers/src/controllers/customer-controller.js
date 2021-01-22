@@ -26,20 +26,34 @@ api.save = (request, response) => {
   });
 };
 
-api.findOne = (request, response) => {
+api.findById = (request, response) => {
   const req = request.params.id;
   console.log(req);
 
-  neDB.findOne({ name: req }).exec((exception, customers) => {
+  neDB.findOne({ _id: req }).exec((exception, customers) => {
+    if (customers === null) {
+      const setence = 'Customer not found';
+      response.json({ mensagem: setence });
+    } else {
+      response.json(customers);
+    }
+  });
+};
+
+/*api.findById = (request, response) => {
+  const req = request.params.id;
+  console.log(req);
+
+  neDB.findOne({ _id: req }, {}, (exception, customers) => {
     if (exception || customers === null) {
       const setence = 'Customer not found';
       console.log(setence, exception);
-      response.status(400);
-      response.json({ mensagem: setence });
+      response.status(400).json({ mensagem: setence });
     }
+
     response.json(customers);
   });
-};
+};*/
 
 api.update = (request, response) => {
   const req = request.params.id;
@@ -72,7 +86,7 @@ api.delete = (request, response) => {
       console.log(setence, exception);
       return response.status(400).json({ mensagem: setence });
     } else {
-      return response.status(200).json(customers);
+      return response.status(200).json({ mensagem: 'Deleted' });
     }
   });
 };

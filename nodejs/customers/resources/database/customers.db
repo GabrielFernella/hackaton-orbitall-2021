@@ -1,6 +1,5 @@
 {"name":"Leandro Ferreira Machado Capuano","age":41,"description":"This customer is very nice!","_id":"1Q7nUFtA4mffe5GE"}
 {"body":{"name":"Cola","age":50,"description":"teste"},"_id":"47q6JJhwlGe6EetM"}
-{"name":"teste","age":100,"description":"Teste","_id":"A69arTaoSflqla5I"}
 {"name":"Juliane Lyra","age":41,"description":"She is a teacher and programmer.","_id":"Q1tuGrBASZFlchay"}
 {"body":{"name":"kratos","age":30,"description":"my revange is end"},"_id":"fqBmAW24vtdTLmQe"}
 {"name":"Fortunato Capuano Neto","age":66,"description":"Coboleiro das antigas","_id":"hfiiJJAN0lsiLoTB"}
@@ -9,3 +8,4 @@
 {"name":"Pica Pau","age":109,"description":"He he he, hehehehehe!","_id":"paz3HUMUR1ZhElWN"}
 {"body":{"name":"minions","age":130,"description":"Aha"},"_id":"vQbfgz9sv1Hm6N9H"}
 {"name":"Darth Vader","age":60,"description":"I am your father!","_id":"w44QEIJgqZKr9KFB"}
+{"$$deleted":true,"_id":"47q6JJhwlGe6EetM"}
