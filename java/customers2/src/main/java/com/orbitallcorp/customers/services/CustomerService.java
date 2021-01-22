@@ -17,10 +17,11 @@ public class CustomerService {
         return customerRepository.save((customer));
     }
 
-    public Object updateUser(Long id) {
+    public Object updateUser(Long id, Customer customer) {
 
         try {
             Optional<Customer> user = customerRepository.findById(id);
+
             return user;
 
         } catch (Error err) {
