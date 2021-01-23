@@ -3,6 +3,10 @@ package com.orbitallcorp.hack21.cards.services;
 import com.orbitallcorp.hack21.cards.domains.Card;
 import com.orbitallcorp.hack21.cards.repositories.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -55,5 +59,18 @@ public class CardService {
         });
 
         return available;
+    }
+
+    public List<Card> getAllEmployees(Integer pageNo, Integer pageSize, String sortBy)
+    {
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(Sort.Order.asc(sortBy)));
+
+        Page<Card> pagedResult = cardRepository.findAll(paging);
+
+        if(pagedResult.hasContent()) {
+            return pagedResult.getContent();
+        } else {
+            return new ArrayList<Card>();
+        }
     }
 }
