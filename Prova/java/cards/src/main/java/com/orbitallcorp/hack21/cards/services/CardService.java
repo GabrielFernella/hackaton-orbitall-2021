@@ -61,7 +61,7 @@ public class CardService {
         return available;
     }
 
-    public List<Card> getAllEmployees(Integer pageNo, Integer pageSize, String sortBy)
+    public List<Card> getAllCards(Integer pageNo, Integer pageSize, String sortBy)
     {
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(Sort.Order.asc(sortBy)));
 

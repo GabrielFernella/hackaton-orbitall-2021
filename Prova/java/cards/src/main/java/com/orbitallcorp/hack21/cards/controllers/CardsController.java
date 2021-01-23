@@ -31,7 +31,7 @@ public class CardsController {
             @RequestParam(defaultValue = "3") Integer pageSize,
             @RequestParam(defaultValue = "cardNumber") String sortBy)
     {
-        List<Card> list = cardService.getAllEmployees(pageNo, pageSize, sortBy);
+        List<Card> list = cardService.getAllCards(pageNo, pageSize, sortBy);
 
         return new ResponseEntity<List<Card>>(list, new HttpHeaders(), HttpStatus.OK);
     }
