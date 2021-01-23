@@ -31,12 +31,10 @@ api.findById = (request, response) => {
   console.log(req);
 
   neDB.findOne({ _id: req }, (exception, customers) => {
-    if (customers === null) {
-      const setence = 'Customer not found';
-      response.json({ mensagem: setence });
-    } else {
-      response.json(customers);
+    if (exception || customers === null) {
+      return response.status(404).json({ mensagem: 'User not found' });
     }
+    return response.json(customers);
   });
 };
 
@@ -45,29 +43,13 @@ api.findByName = (request, response) => {
   console.log(req);
 
   neDB.findOne({ name: req }, (exception, customers) => {
-    if (customers === null) {
-      const setence = 'Customer not found';
-      response.json({ mensagem: setence });
+    if (exception || customers === null) {
+      response.json({ mensagem: 'User not found' });
     } else {
       response.json(customers);
     }
   });
 };
-
-/*api.findById = (request, response) => {
-  const req = request.params.id;
-  console.log(req);
-
-  neDB.findOne({ _id: req }, {}, (exception, customers) => {
-    if (exception || customers === null) {
-      const setence = 'Customer not found';
-      console.log(setence, exception);
-      response.status(400).json({ mensagem: setence });
-    }
-
-    response.json(customers);
-  });
-};*/
 
 api.update = (request, response) => {
   const req = request.params.id;
@@ -78,13 +60,11 @@ api.update = (request, response) => {
   neDB.update(
     { _id: req },
     { name: name, age: age, description: description },
-    (exception, customers) => {
-      if (exception || customers === 0) {
-        const setence = 'Custumer not found';
-        console.log(setence, exception);
-        response.status(400).json({ mensagem: setence });
+    (err, customers) => {
+      if (err || customers === 0) {
+        return response.status(404).json({ mensagem: 'User not found' });
       }
-      response.json(customers);
+      return response.status(200).json(request.body);
     }
   );
 };
@@ -94,14 +74,11 @@ api.delete = (request, response) => {
 
   console.log(req);
 
-  neDB.remove({ _id: req }, {}, (exception, customers) => {
-    if (exception || customers === 0) {
-      const setence = `/${request.params.name}/`;
-      console.log(setence, exception);
-      return response.status(400).json({ mensagem: setence });
-    } else {
-      return response.status(200).json({ mensagem: 'Deleted' });
+  neDB.remove({ _id: req }, {}, (err, customers) => {
+    if (err || customers === 0) {
+      return response.status(404).json({ mensagem: 'User not found' });
     }
+    return response.status(200).json({ message: 'Deleted' });
   });
 };
 

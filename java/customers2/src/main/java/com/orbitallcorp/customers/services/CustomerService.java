@@ -1,8 +1,11 @@
 package com.orbitallcorp.customers.services;
 
+import com.jayway.jsonpath.spi.json.GsonJsonProvider;
 import com.orbitallcorp.customers.domains.Customer;
 import com.orbitallcorp.customers.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -19,15 +22,15 @@ public class CustomerService {
 
     public Object updateUser(Long id, Customer customer) {
 
-        try {
-            Optional<Customer> user = customerRepository.findById(id);
+        Object response = customerRepository.findById(id)
+                .map( cust -> {
+            cust.setName(customer.getName());
+            cust.setAge(customer.getAge());
+            cust.setDescription(customer.getDescription());
+            return cust;
+                });
 
-            return user;
-
-        } catch (Error err) {
-
-            return err;
-        }
+        return response;
     }
 
     public List<Customer> findAll() {
@@ -49,5 +52,15 @@ public class CustomerService {
 
     public Object findById(Long id){
         return customerRepository.findById(id);
+    }
+
+    public Object deleteUser(Long id){
+
+        Object available =  customerRepository.findById(id).map(user -> {
+            customerRepository.deleteById(id);
+            return user;
+        });
+
+        return available;
     }
 }
