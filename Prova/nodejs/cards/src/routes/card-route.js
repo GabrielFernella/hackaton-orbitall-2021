@@ -1,7 +1,9 @@
-const api = require('../controllers/card-controller')
+const api = require('../controllers/card-controller');
 
 module.exports = (app) => {
-    app.route('')
-        .get(api.findAll)
+  app.route('/cards').get(api.findAll).post(api.save);
 
-}
+  app.route('/cards/:id').get(api.findById).put(api.update).delete(api.delete);
+
+  app.route('/cards/paginationAndSorting').get(api.findPage);
+};
