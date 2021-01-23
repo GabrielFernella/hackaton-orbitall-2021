@@ -3,3 +3,5 @@
 {"cardNumber":6,"embossName":"Zeus","customerName":"","documentNumber":"","motherName":"","address":"","city":"","_id":"O4qBktBzPelgJZFm"}
 {"cardNumber":2,"embossName":"Zeus","customerName":"","documentNumber":"","motherName":"","address":"","city":"","_id":"cDIwLs93m2JmrLUD"}
 {"cardNumber":3,"embossName":"Zeus","customerName":"","documentNumber":"","motherName":"","address":"","city":"","_id":"wPOkNevORrFtLNvU"}
+{"cardNumber":55,"embossName":"teste","customerName":"","documentNumber":"","motherName":"","address":"","city":"","_id":"wPOkNevORrFtLNvU"}
+{"$$deleted":true,"_id":"wPOkNevORrFtLNvU"}

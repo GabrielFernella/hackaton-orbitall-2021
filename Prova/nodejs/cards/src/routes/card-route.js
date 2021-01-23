@@ -5,5 +5,5 @@ module.exports = (app) => {
 
   app.route('/cards/:id').get(api.findById).put(api.update).delete(api.delete);
 
-  app.route('/cards/paginationAndSorting').get(api.findPage);
+  //app.route('/cards/paginationAndSorting').get(api.findPage);
 };

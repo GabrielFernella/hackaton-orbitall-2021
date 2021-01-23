@@ -40,13 +40,13 @@ api.findById = (request, response) => {
 
 api.findPage = (request, response) => {
   const req = request.params.name;
-  const { page, limit, sort } = request.params;
+  const { page, limit, sort } = request.query;
   console.log(req);
 
   db.find({})
-    //.sort(sort)
-    .skip(page)
-    .limit(limit)
+    .sort({ name: 1 })
+    .skip(1)
+    .limit(2)
     .exec((exception, docs) => {
       if (exception || docs === null) {
         console.log('Não Passou');
@@ -70,11 +70,19 @@ api.update = (request, response) => {
     city,
   } = request.body;
 
-  console.log(body);
+  console.log(request.body);
 
   neDB.update(
     { _id: req },
-    { cardNumber, embossName, customerName, documentNumber, motherName, address, city },
+    {
+      cardNumber,
+      embossName,
+      customerName,
+      documentNumber,
+      motherName,
+      address,
+      city,
+    },
     (err, customers) => {
       if (err || customers === 0) {
         return response.status(404).json({ mensagem: 'User not found' });
