@@ -25,7 +25,7 @@ public class CardsController {
         return ResponseEntity.ok(card);
     }
 
-    @GetMapping("/cards")
+    @GetMapping(path = {"/paginationAndSorting"})
     public ResponseEntity<List<Card>> getAllEmployees(
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "3") Integer pageSize,
@@ -35,7 +35,6 @@ public class CardsController {
 
         return new ResponseEntity<List<Card>>(list, new HttpHeaders(), HttpStatus.OK);
     }
-
 
     @GetMapping("/cards/{id}")
     public ResponseEntity<Card> findOne(@PathVariable("id") Long id) {
