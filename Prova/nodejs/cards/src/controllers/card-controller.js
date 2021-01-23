@@ -39,21 +39,25 @@ api.findById = (request, response) => {
 };
 
 api.findPage = (request, response) => {
-  const req = request.params.name;
-  const { page, limit, sort } = request.query;
-  console.log(req);
+  //const req = request.params;
+  const page = request.query.page;
+  const limit = request.query.limit;
+  const sort = request.query.sort;
 
-  db.find({})
-    .sort({ name: 1 })
-    .skip(1)
-    .limit(2)
+  console.log(page, limit, sort);
+
+  neDB
+    .find({})
+    .sort({ cardNumber: 1 })
+    .skip(page)
+    .limit(limit)
     .exec((exception, docs) => {
       if (exception || docs === null) {
         console.log('Não Passou');
         return response.json({ mensagem: 'User not found' });
       } else {
         console.log('Passou');
-        return response.json({ message: 'Passou porra' });
+        return response.status(200).json(docs);
       }
     });
 };
