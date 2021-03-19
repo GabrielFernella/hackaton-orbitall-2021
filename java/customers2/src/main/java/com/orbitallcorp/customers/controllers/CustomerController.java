@@ -38,8 +38,8 @@ public class CustomerController {
 
 
     @PostMapping
-    public ResponseEntity<Customer> save(@RequestBody Customer customer) {
-        Customer savedCustomer = customerService.save((customer));
+    public ResponseEntity<Customer> save(@RequestBody Customer cust) {
+        Customer savedCustomer = customerService.save((cust));
 
         return new ResponseEntity(savedCustomer, HttpStatus.CREATED);
     }
